@@ -23,3 +23,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/calakus/RFCCA
+BugReports: https://github.com/calakus/RFCCA/issues
