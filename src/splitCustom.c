@@ -635,7 +635,7 @@ double ccaSplitAbsoluteDifference(unsigned int n,
     dimY = featureCount - dimX - 1;
     
     lapack_int nRow, p = dimX, q = dimY;
-    lapack_int lda, info;
+    lapack_int lda;
     
     unsigned int minDim = dimY;
     if(dimX < dimY){
@@ -704,23 +704,13 @@ double ccaSplitAbsoluteDifference(unsigned int n,
                 }
             }
 
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: QR decomposition of X");}
-            
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: Q extraction from qr X");}
-            
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: QR decomposition of Y");}
-            
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: Q extraction from qr Y");}
-
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
             cblas_dgemm( CblasColMajor,  CblasTrans,  CblasNoTrans, Kx, Ky, nRow, 1, qrX, nRow, qrY, nRow, 0, qMul, Kx);
+            LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
 
-            info = LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
-//            if(info!=0){printf("ERROR: SVD");}
-            
             ccaCorLeft = S[0];
             
             dealloc_dvector2(qrX, (leftSize*dimX));
@@ -754,23 +744,13 @@ double ccaSplitAbsoluteDifference(unsigned int n,
                 }
             }
          
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: QR decomposition of X");}
-                       
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: Q extraction from qr X");}
-            
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: QR decomposition of Y");}
-                       
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: Q extraction from qr Y");}
-
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
             cblas_dgemm( CblasColMajor,  CblasTrans,  CblasNoTrans, Kx, Ky, nRow, 1, qrX, nRow, qrY, nRow, 0, qMul, Kx);
+            LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
 
-            info = LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
-//            if(info!=0){printf("ERROR: SVD");}
-            
             ccaCorRight = S[0];
          
             dealloc_dvector2(qrX, (rghtSize*dimX));
@@ -814,7 +794,7 @@ double ccaSplitWeightedSum(unsigned int n,
     dimY = featureCount - dimX - 1;
     
     lapack_int nRow, p = dimX, q = dimY;
-    lapack_int lda, info;
+    lapack_int lda;
     
     unsigned int minDim = dimY;
     if(dimX < dimY){
@@ -883,22 +863,12 @@ double ccaSplitWeightedSum(unsigned int n,
                 }
             }
 
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: QR decomposition of X");}
-            
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: Q extraction from qr X");}
-            
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: QR decomposition of Y");}
-            
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: Q extraction from qr Y");}
-
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
             cblas_dgemm( CblasColMajor,  CblasTrans,  CblasNoTrans, Kx, Ky, nRow, 1, qrX, nRow, qrY, nRow, 0, qMul, Kx);
-
-            info = LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
-//            if(info!=0){printf("ERROR: SVD");}
+            LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
             
             ccaCorLeft = S[0];
             ccaCorLeft = pow(ccaCorLeft,2);
@@ -934,22 +904,12 @@ double ccaSplitWeightedSum(unsigned int n,
                 }
             }
          
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: QR decomposition of X");}
-                       
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
-//            if(info!=0){printf("ERROR: Q extraction from qr X");}
-            
-            info = LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: QR decomposition of Y");}
-                       
-            info = LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
-//            if(info!=0){printf("ERROR: Q extraction from qr Y");}
-
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, p, qrX, lda, tauX );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Kx, Kx, qrX, lda, tauX );
+            LAPACKE_dgeqrf( LAPACK_COL_MAJOR, nRow, q, qrY, lda, tauY );
+            LAPACKE_dorgqr( LAPACK_COL_MAJOR, nRow, Ky, Ky, qrY, lda, tauY );
             cblas_dgemm( CblasColMajor,  CblasTrans,  CblasNoTrans, Kx, Ky, nRow, 1, qrX, nRow, qrY, nRow, 0, qMul, Kx);
-
-            info = LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
-//            if(info!=0){printf("ERROR: SVD");}
+            LAPACKE_dgesvd( LAPACK_COL_MAJOR, 'N', 'N', Kx, Ky, qMul, Kx, S, NULL, 1, NULL, 1, superb );
             
             ccaCorRight = S[0];
             ccaCorRight = pow(ccaCorRight,2);

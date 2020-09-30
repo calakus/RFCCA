@@ -15566,7 +15566,7 @@ char customMultivariateSplit (uint       treeID,
   double delta, deltaPartial, deltaMax;
   uint   deltaNorm;
   uint j, k, m, r, rr;
-  uint NumberOfFeatures; /* for rfcca*/
+  uint NumberOfFeatures  = 0; /* for rfcca*/
   localSplitIndicator    = NULL;  
   splitVector            = NULL;  
   splitVectorSize        = 0;     
