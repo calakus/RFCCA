@@ -2,3 +2,6 @@
 .RData
 .Rproj.user
 inst/doc
+config.log
+config.status
+.DS_Store

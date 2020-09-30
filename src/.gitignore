@@ -1,1 +1,5 @@
 Makevars
+RFCCA.so
+R_init_randomForestSRC.o
+randomForestSRC.o
+splitCustom.o
