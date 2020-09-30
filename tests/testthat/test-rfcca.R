@@ -17,7 +17,7 @@ test_that("small ntree",{
   expect_error(rfcca(X = train.X,
                      Y = train.Y,
                      Z = train.Z,
-                     ntree = 10),
+                     ntree = 2),
                "Some observations have empty BOP. Re-run rfcca with larger 'ntree'.")
 })
 
