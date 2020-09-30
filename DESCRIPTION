@@ -21,7 +21,8 @@ Imports:
     PMA
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 URL: https://github.com/calakus/RFCCA
 BugReports: https://github.com/calakus/RFCCA/issues
