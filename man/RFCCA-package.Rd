@@ -10,7 +10,7 @@ RFCCA is a random forest method for estimating the canonical correlations
 between two sets of variables depending on the subject-related covariates.
 The trees are built with a splitting rule specifically designed to partition
 the data to maximize the canonical correlation heterogeneity between child
-nodes. RFCCA uses randomForestSRC package (Ishwaran and Kogalur, 2020) by
+nodes. RFCCA uses 'randomForestSRC' package (Ishwaran and Kogalur, 2020) by
 freezing at the version 2.9.3. The custom splitting rule feature is utilised
 to apply the proposed splitting rule.
 }
