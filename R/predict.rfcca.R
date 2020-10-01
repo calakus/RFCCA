@@ -3,8 +3,8 @@
 #' Obtain predicted canonical correlations using a rfcca forest for training or
 #'   new data.
 #'
-#' @param object An object of class \code{(rfcca,grow)} or \code{(rfcca,forest)}
-#'   created by the function \code{rfcca}.
+#' @param object An object of class \code{(rfcca,grow)} created by the function
+#'   \code{rfcca}.
 #' @param newdata Test data of the set of subject-related covariates (Z). Either
 #'   a matrix of numerical values, or a data.frame with numeric values,
 #'   characters and factors. If missing, the out-of-bag predictions in
@@ -69,6 +69,12 @@
 #' print(pred.obj)
 #' print(pred.obj2)
 #' }
+#'
+#' @seealso
+#'   \code{\link{rfcca}}
+#'   \code{\link{vimp.rfcca}}
+#'   \code{\link{print.rfcca}}
+
 predict.rfcca <- function(object,
                           newdata,
                           membership = FALSE,

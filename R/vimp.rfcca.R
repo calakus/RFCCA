@@ -36,6 +36,10 @@
 #' }
 #' @method vimp rfcca
 #' @aliases vimp.rfcca vimp
+#'
+#' @seealso
+#'   \code{\link{plot.vimp.rfcca}}
+
 vimp.rfcca <- function(object,
                        ...)
 {

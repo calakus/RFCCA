@@ -46,3 +46,6 @@ vimp.obj <- vimp(rfcca.obj)
 vimp.z <- vimp.obj$importance
 }
 }
+\seealso{
+\code{\link{plot.vimp.rfcca}}
+}

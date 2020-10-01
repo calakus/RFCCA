@@ -31,6 +31,10 @@
 #' }
 #' @method plot.vimp rfcca
 #' @aliases plot.vimp.rfcca plot.vimp
+#'
+#' @seealso
+#'   \code{\link{vimp.rfcca}}
+
 plot.vimp.rfcca <- function(x,
                             sort = TRUE,
                             ndisp = NULL,

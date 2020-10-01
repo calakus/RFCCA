@@ -110,9 +110,15 @@
 #' data(data, package = "RFCCA")
 #' set.seed(2345)
 #'
+#' ## define train/test split
+#' smp <- sample(1:nrow(data$X), size = round(nrow(data$X) * 0.7),
+#'   replace = FALSE)
+#' train.data <- lapply(data, function(x) {x[smp, ]})
+#' test.Z <- data$Z[-smp, ]
+#'
 #' ## train rfcca
-#' rfcca.obj <- rfcca(X = data$X, Y = data$Y, Z = data$Z, ntree = 100,
-#'   importance = TRUE)
+#' rfcca.obj <- rfcca(X = train.data$X, Y = train.data$Y, Z = train.data$Z,
+#'   ntree = 100, importance = TRUE)
 #'
 #' ## print the grow object
 #' print(rfcca.obj)
@@ -120,13 +126,24 @@
 #' ## get the OOB predictions
 #' pred.oob <- rfcca.obj$predicted.oob
 #'
+#' ## predict with new test data
+#' pred.obj <- predict(rfcca.obj, newdata = test.Z)
+#' pred <- pred.obj$predicted
+#'
 #' ## get the variable importance measures
 #' z.vimp <- rfcca.obj$importance
 #'
 #' ## train rfcca and estimate the final canonical correlations with "scca"
-#' rfcca.obj2 <- rfcca(X = data$X, Y = data$Y, Z = data$Z, ntree = 100,
-#'   finalcca = "scca")
+#' rfcca.obj2 <- rfcca(X = train.data$X, Y = train.data$Y, Z = train.data$Z,
+#'   ntree = 100, finalcca = "scca")
 #' }
+#'
+#' @seealso
+#'   \code{\link{predict.rfcca}}
+#'   \code{\link{global.significance}}
+#'   \code{\link{vimp.rfcca}}
+#'   \code{\link{print.rfcca}}
+
 rfcca <- function(X,
                   Y,
                   Z,

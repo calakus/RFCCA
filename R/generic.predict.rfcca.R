@@ -16,10 +16,9 @@ generic.predict.rfcca <- function(object,
   finalcca <- match.arg(as.character(finalcca), c("cca", "scca","rcca"))
   ## object cannot be missing
   if (missing(object)) {stop("object is missing!")}
-  ## incoming object must be a grow forest or a forest object
-  if (sum(inherits(object, c("rfcca", "grow"), TRUE) == c(1, 2)) != 2    &
-      sum(inherits(object, c("rfcca", "forest"), TRUE) == c(1, 2)) != 2)
-    stop("this function only works for objects of class `(rfcca, grow)' or '(rfcca, forest)'")
+  ## incoming object must be a grow forest object
+  if (sum(inherits(object, c("rfcca", "grow"), TRUE) == c(1, 2)) != 2)
+    stop("this function only works for objects of class `(rfcca, grow)'")
   ## grow forests must have true forest information
   if (sum(inherits(object, c("rfcca", "grow"), TRUE) == c(1, 2)) == 2) {
     if (is.forest.missing(object)) {

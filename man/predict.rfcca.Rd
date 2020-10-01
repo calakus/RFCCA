@@ -13,8 +13,8 @@
 )
 }
 \arguments{
-\item{object}{An object of class \code{(rfcca,grow)} or \code{(rfcca,forest)}
-created by the function \code{rfcca}.}
+\item{object}{An object of class \code{(rfcca,grow)} created by the function
+\code{rfcca}.}
 
 \item{newdata}{Test data of the set of subject-related covariates (Z). Either
 a matrix of numerical values, or a data.frame with numeric values,
@@ -88,4 +88,10 @@ pred <- pred.obj2$predicted
 print(pred.obj)
 print(pred.obj2)
 }
+
+}
+\seealso{
+\code{\link{rfcca}}
+\code{\link{vimp.rfcca}}
+\code{\link{print.rfcca}}
 }

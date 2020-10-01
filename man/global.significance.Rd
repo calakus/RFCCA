@@ -52,7 +52,7 @@ An object of class \code{(rfcca,globalsignificance)} which is a list
 with the following components:
 
 \item{call}{The original call to \code{global.significance}.}
-\item{pvalue}{}
+\item{pvalue}{\emph{p}-value, see below for details.}
 \item{n}{Sample size of the data (\code{NA}'s are omitted).}
 \item{ntree}{Number of trees grown.}
 \item{nperm}{Number of permutations.}
@@ -79,6 +79,23 @@ the columns.}
 This function runs a permutation test to evaluates the global effect of
 subject-related covariates (Z). Returns an estimated \emph{p}-value.
 }
+\section{Details}{
+
+We perform a hypothesis test to evaluate the global effect of the
+subject-related covariates on distinguishing between canonical correlations.
+Define the unconditional canonical correlation between \eqn{X} and
+\eqn{Y} as \eqn{\rho_{CCA}(X,Y)} which is found by computing CCA with
+all \eqn{X} and \eqn{Y}, and the conditional canonical correlation between
+\eqn{X} and \eqn{Y} given \eqn{Z} as \eqn{\rho(X,Y | Z)} which is found by
+\code{rfcca()}. If there is a global effect of \eqn{Z} on correlations
+between \eqn{X} and \eqn{Y}, \eqn{\rho(X,Y | Z)} should be significantly
+different from \eqn{\rho_{CCA}(X,Y)}. We conduct a permutation test
+for the null hypothesis \deqn{H_0 : \rho(X,Y | Z) = \rho_{CCA}(X,Y)}
+We estimate a \emph{p}-value with the permutation test. If the \emph{p}-value is
+less than the pre-specified significance level \eqn{\alpha}, we reject the
+null hypothesis.
+}
+
 \examples{
 \donttest{
 ## load generated example data
@@ -88,4 +105,10 @@ set.seed(2345)
 global.significance(X = data$X, Y = data$Y, Z = data$Z, ntree = 40,
   nperm = 10)
 }
+
+}
+\seealso{
+\code{\link{rfcca}}
+\code{\link{predict.rfcca}}
+\code{\link{print.rfcca}}
 }

@@ -41,3 +41,6 @@ rfcca.obj <- rfcca(X = data$X, Y = data$Y, Z = data$Z, ntree = 100,
 plot.vimp(rfcca.obj)
 }
 }
+\seealso{
+\code{\link{vimp.rfcca}}
+}
