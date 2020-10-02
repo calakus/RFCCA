@@ -57,7 +57,7 @@ We consider the following setting: let $X$ and $Y$ be two multivariate data sets
 We perform a hypothesis test to evaluate the global effect of the subject-related covariates on distinguishing between canonical correlations. Define the unconditional canonical correlation between $X$ and $Y$ as $\rho_{\tiny CCA}(X,Y)$ which is found by computing CCA with all $X$ and $Y$, and the conditional canonical correlation between $X$ and $Y$ given $Z$ as $\rho(X,Y | Z)$ which is found by RFCCA. If there is a global effect of $Z$ on correlations between $X$ and $Y$, $\rho(X,Y | Z)$ should be significantly different from $\rho_{\tiny CCA}(X,Y)$. We conduct a permutation test for the null hypothesis $$H_0 : \rho(X,Y | Z) = \rho_{\tiny CCA}(X,Y)$$ We estimate a *p*-value with the permutation test. If the $p$-value is less than the pre-specified significance level $\alpha$, we reject the null hypothesis. 
 
 # Data analysis
-We will show how to use RFCCA package on a generated data set. The data set has three sets of variables: $X \in R^{nx2}$, $Y \in R^{nx2}$ and $Z \in R^{nx7}$. The sample size ($n$) is 300. The correlation between $X$ and $Y$ depends only on $Z_1,...,Z_5$ (*i.e.* $Z_6 and Z_7$ are noise variables). Firstly, we load the data and split the data into train and test sets:
+We will show how to use RFCCA package on a generated data set. The data set has three sets of variables: $X \in R^{n \times 2}$, $Y \in R^{n \times 2}$ and $Z \in R^{n \times 7}$. The sample size ($n$) is 300. The correlation between $X$ and $Y$ depends only on $Z_1,...,Z_5$ (*i.e.* $Z_6$ and $Z_7$ are noise variables). Firstly, we load the data and split the data into train and test sets:
 
 ```{r, message=FALSE}
 library(RFCCA)
@@ -93,7 +93,7 @@ vimp <- vimp.obj$importance
 vimp
 ```
 
-Moreover, we can plot the variable importance measures. We know that the correlation between $X$ and $Y$ depends on $Z_1,...,Z_5$. Therefore, it is expected to get higher VIMP measures for $Z_1,...,Z_5$ than $Z_6 and Z_7$.
+Moreover, we can plot the variable importance measures. We know that the correlation between $X$ and $Y$ depends on $Z_1,...,Z_5$. Therefore, it is expected to get higher VIMP measures for $Z_1,...,Z_5$ than $Z_6$ and $Z_7$.
 ```{r, fig.show='hold', fig.width=6, fig.height=4, fig.align='center'}
 plot.vimp(vimp.obj)
 ```
@@ -122,6 +122,14 @@ Again, we can look at the estimated canonical coefficients for the $X$ and $Y$.
 ```{r}
 head(pred.obj2$predicted.coef$coefx)
 head(pred.obj2$predicted.coef$coefy)
+```
+
+We can plot the canonical correlation estimations using classical CCA and Sparse CCA.
+```{r, fig.show='hold', fig.width=5, fig.height=5, fig.align='center'}
+plot(pred, pred2, xlab="Classical CCA", ylab="Sparse CCA", 
+     xlim=c(min(pred,pred2),max(pred,pred2)), ylim=c(min(pred,pred2),max(pred,pred2)),
+     pch = 20) 
+abline(0,1,col = "red") 
 ```
 
 # Session info
