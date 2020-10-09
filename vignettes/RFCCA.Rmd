@@ -42,7 +42,7 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-This R package implements the Random Forest with Canonical Correlation Analysis (RFCCA) method proposed by .... (link to the paper?). The theoretical details are given in the next section. The last section presents a data analysis using this method. 
+This R package implements the Random Forest with Canonical Correlation Analysis (RFCCA) method proposed by REFERENCE_TO_OUR_PAPER (link to the paper?). The theoretical details are given in the next section. The last section presents a data analysis using this method. 
 
 # Method
 ## Motivation
@@ -71,7 +71,12 @@ train.Z <- data$Z[smp,]
 test.Z <- data$Z[-smp,]
 ```
 
-Then, we apply the global significance test to evaluate the global effect of $Z$. 
+Then, we train the random forest with `rfcca()`. 
+```{r}
+rf.obj <- rfcca(X = train.X, Y = train.Y, Z = train.Z, ntree = 100)
+```
+
+Before analyzing the prediction results, we have to check first if the the global effect of $Z$ is significant by applying the global significance test.
 ```{r}
 test.obj <- global.significance(X = train.X, Y = train.Y, Z = train.Z, 
                                 ntree = 100, nperm = 10)
@@ -79,12 +84,12 @@ test.obj$pvalue
 ```
 Using 10 permutations, the estimated *p*-value < 0.05 (where the significance level($\alpha$) is 0.05). Hence, we reject the null hypothesis. 10 permutations to compute the *p*-value is indeed very low. Using 500 permutations, we got a *p*-value of 0. Higher number of permutations is required to estimate the *p*-value accurately. However, it should also be noted that higher number of permutations increases the computational time. 
 
-Next, we train the random forest with `rfcca()`. We can get the out-of-bag (OOB) predictions from the grow object.
+Since the global effect of $Z$ is significant, now we can analyze the predictions. We can get the out-of-bag (OOB) predictions from the grow object.
 ```{r}
-rf.obj <- rfcca(X = train.X, Y = train.Y, Z = train.Z, ntree = 100)
 pred.oob <- rf.obj$predicted.oob
 head(pred.oob)
 ```
+Those values represent the OOB canonical correlation predictions for the training observations. The predicted canonical correlations range between 0 and 1 where the closer the values to 1, the stronger the correlation between the canonical variates, $Xa$ and $Yb$.
 
 We can get the variable importance (VIMP) measures for $Z$. VIMP measures reflect the predictive power of subject-related covariates on the estimated correlations.
 ```{r}
@@ -104,12 +109,14 @@ pred.obj <- predict(rf.obj, test.Z)
 pred <- pred.obj$predicted
 head(pred)
 ```
+Those values represent the canonical correlation predictions for the test observations.
 
-Besides the canonical correlation estimations, we can get the estimated canonical coefficients for the $X$ and $Y$, $a$ and $b$.
+Besides the canonical correlation estimations, we can get the estimated canonical coefficients for the $X$ and $Y$, $a$ and $b$, respectively.
 ```{r}
 head(pred.obj$predicted.coef$coefx)
 head(pred.obj$predicted.coef$coefy)
 ```
+We can analyse the linear relations between the variables with the entries of the estimated canonical coefficient vectors, $a$ and $b$. The values under the $X_1$ and $X_2$ columns represent the canonical coefficients for $X_1$ and $X_2$, $a_1$ and $a_2$, respectively. Similarly, $b_1$ and $b_2$ for the canonical coefficients of $Y_1$ and $Y_2$ under the corresponding columns.
 
 Alternatively, we can use variants of CCA for the final canonical correlation estimation. Here, we use Sparse CCA (SCCA) for the final canonical correlation estimations. The idea of SCCA is to improve the interpretability of results by forcing some of the canonical coefficients to be zero which results in a set of selected features that has the highest importance in the relationship between $X$ and $Y$.
 ```{r}
@@ -131,6 +138,11 @@ plot(pred, pred2, xlab="Classical CCA", ylab="Sparse CCA",
      pch = 20) 
 abline(0,1,col = "red") 
 ```
+
+For further data analysis, one can use SHAP values (Lundberg et al., 2017) to gain additional insights. SHAP values show how much each variable contributes, either positively or negatively, to the individual predictions. For an example of application to the problem in question, see REFERENCE_TO_OUR_PAPER.
+
+# References
+Lundberg, S. M., & Lee, S. I. (2017). A unified approach to interpreting model predictions. In Advances in neural information processing systems (pp. 4765-4774).
 
 # Session info
 ```{r}
