@@ -17,17 +17,27 @@ ccaest <- function(bop, xtrain, ytrain) {
 }
 
 ## construct bop
-findforestbop <- function(obs, mem.train, mem.test, ntree) {
-  mem.obs <- mem.test[obs, ]
-  out <- lapply(1:ntree, "findtreebop", mem.train = mem.train, mem.test = mem.obs)
+findforestbop <- function(obs, mem.train, mem.test = NULL, inbag, ntree, bop.type) {
+  if (bop.type == "oob") {
+    inbag1 <- (inbag>0)*1
+    mem.inbag <- mem.train*inbag1
+    mem.oob <- mem.train*(1-inbag1)
+    mem.obs <- mem.oob[obs, ]
+    out <- lapply(1:ntree, "findtreebop", mem.train = mem.inbag, mem.test = mem.obs, inbag = inbag)
+  } else if (bop.type == "test") {
+    mem.obs <- mem.test[obs, ]
+    inbag <- inbag + (inbag==0)*1
+    out <- lapply(1:ntree, "findtreebop", mem.train = mem.train, mem.test = mem.obs, inbag = inbag)
+  }
   return(out)
 }
 
-findtreebop <- function(tree, mem.train, mem.test) {
-  out <- c()
+findtreebop <- function(tree, mem.train, mem.test, inbag) {
+  out <- NULL
   node <- mem.test[tree]
   if (node != 0) {
-    out <- which(mem.train[ ,tree] == node)
+    out <- which(mem.train[, tree] == node)
+    out <- rep(out, inbag[out, tree])
   }
   return(out)
 }

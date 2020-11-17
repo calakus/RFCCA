@@ -58,12 +58,10 @@ generic.predict.rfcca <- function(object,
       } else {
         inbag <- object$rfsrc.grow$inbag
         mem <- object$rfsrc.grow$membership
-        mem.inbag <- mem*(inbag)
-        mem.oob <- mem*(1-inbag)
         ## find BOPs for training observations,
         ## BOP of train observation i is constructed with the inbag observations
         ## in the terminal nodes where i is ended up as an OOB
-        bop.out <- lapply(1:n, "findforestbop", mem.train = mem.inbag, mem.test = mem.oob, ntree = ntree)
+        bop.out <- lapply(1:n, "findforestbop", mem.train = mem, inbag = inbag, ntree = ntree, bop.type = "oob")
         bop.out <- lapply(bop.out, mergelist)
         if (sum(sapply(bop.out, is.null)) > 0) {
           stop("Some observations have empty BOP. Re-run rfcca with larger 'ntree'.")
@@ -84,6 +82,7 @@ generic.predict.rfcca <- function(object,
     newdata <- newdata[, is.element(names(newdata),zvar.names), drop = FALSE]
     ## get membership info for training observations
     membership.train <- object$rfsrc.grow$membership
+    inbag <- object$rfsrc.grow$inbag
     ## get the training data
     xvar <- object$xvar
     yvar <- object$yvar
@@ -98,7 +97,7 @@ generic.predict.rfcca <- function(object,
     ## find BOPs for new observations,
     ## BOP of new observation i is constructed with the training obs.
     ## in the terminal nodes where i is ended up
-    bop.out <- lapply(1:n, "findforestbop", mem.train = membership.train, mem.test = membership.test, ntree = ntree)
+    bop.out <- lapply(1:n, "findforestbop", mem.train = membership.train, mem.test = membership.test, inbag = inbag, ntree = ntree, bop.type = "test")
     bop.out <- lapply(bop.out, mergelist)
     ## compute canonical correlation estimations for training observations
     if (finalcca == "cca") {

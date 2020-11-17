@@ -275,8 +275,6 @@ rfcca <- function(X,
   ## get membership info for training observations
   inbag <- rf$inbag
   mem <- rf$membership
-  mem.inbag <- mem*(inbag)
-  mem.oob <- mem*(1-inbag)
   ## get predictions for training observations
   predicted.oob <- NULL
   predicted.coef <- NULL
@@ -286,7 +284,7 @@ rfcca <- function(X,
     ## find BOPs for training observations,
     ## BOP of train observation i is constructed with the inbag observations
     ## in the terminal nodes where i is ended up as an OOB
-    bop.out <- lapply(1:n, "findforestbop", mem.train = mem.inbag, mem.test = mem.oob, ntree = ntree)
+    bop.out <- lapply(1:n, "findforestbop", mem.train = mem, inbag = inbag, ntree = ntree, bop.type = "oob")
     bop.out <- lapply(bop.out, mergelist)
     if (sum(sapply(bop.out, is.null)) > 0) {
       stop("Some observations have empty BOP. Re-run rfcca with larger 'ntree'.")
