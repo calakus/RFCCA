@@ -74,7 +74,7 @@
 #' set.seed(2345)
 #'
 #' global.significance(X = data$X, Y = data$Y, Z = data$Z, ntree = 40,
-#'   nperm = 10)
+#'   nperm = 5)
 #' }
 #'
 #' @seealso

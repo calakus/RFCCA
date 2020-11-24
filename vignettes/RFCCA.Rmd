@@ -42,7 +42,7 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-This R package implements the Random Forest with Canonical Correlation Analysis (RFCCA) method proposed by REFERENCE_TO_OUR_PAPER (link to the paper?). The theoretical details are given in the next section. The last section presents a data analysis using this method. 
+This R package implements the Random Forest with Canonical Correlation Analysis (RFCCA) method described in Alakus et al. (2020) [<arXiv:2011.11555>](http://arxiv.org/abs/2011.11555). The theoretical details are given in the next section. The last section presents a data analysis using this method. 
 
 # Method
 ## Motivation
@@ -139,9 +139,11 @@ plot(pred, pred2, xlab="Classical CCA", ylab="Sparse CCA",
 abline(0,1,col = "red") 
 ```
 
-For further data analysis, one can use SHAP values (Lundberg et al., 2017) to gain additional insights. SHAP values show how much each variable contributes, either positively or negatively, to the individual predictions. For an example of application to the problem in question, see REFERENCE_TO_OUR_PAPER.
+For further data analysis, one can use SHAP values (Lundberg et al., 2017) to gain additional insights. SHAP values show how much each variable contributes, either positively or negatively, to the individual predictions. For an example of application to the problem in question, see Alakus et al. (2020).
 
 # References
+Alakus, C., Larocque, D., Jacquemont, S., Barlaam, F., Martin, C.-O., Agbogba, K., Lippe, S., and Labbe, A. (2020). Conditional canonical correlation estimation based on covariates with random forests. arXiv preprint arXiv:2011.11555.
+
 Lundberg, S. M., & Lee, S. I. (2017). A unified approach to interpreting model predictions. In Advances in neural information processing systems (pp. 4765-4774).
 
 # Session info

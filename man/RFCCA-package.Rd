@@ -12,7 +12,8 @@ The trees are built with a splitting rule specifically designed to partition
 the data to maximize the canonical correlation heterogeneity between child
 nodes. RFCCA uses 'randomForestSRC' package (Ishwaran and Kogalur, 2020) by
 freezing at the version 2.9.3. The custom splitting rule feature is utilised
-to apply the proposed splitting rule.
+to apply the proposed splitting rule. The method is described in Alakus et
+al. (2020).
 }
 \section{RFCCA functions}{
 
@@ -25,7 +26,12 @@ to apply the proposed splitting rule.
 }
 
 \references{
-Ishwaran H, Kogalur U (2020). Fast Unified Random Forests for
+Alakus, C., Larocque, D., Jacquemont, S., Barlaam, F., Martin,
+C.-O., Agbogba, K., Lippe, S., and Labbe, A. (2020). Conditional canonical
+correlation estimation based on covariates with random forests. arXiv
+preprint arXiv:2011.11555.
+
+Ishwaran, H., Kogalur, U. (2020). Fast Unified Random Forests for
 Survival, Regression, and Classification (RF-SRC). R package version 2.9.3,
 \url{https://cran.r-project.org/package=randomForestSRC}.
 }

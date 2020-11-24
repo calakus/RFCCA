@@ -21,3 +21,6 @@ if (!require(devtools)) {
 }
 devtools::install_github('calakus/RFCCA', build_vignettes = TRUE)
 ```   
+## References
+
+- Alakus, C., Larocque, D., Jacquemont, S., Barlaam, F., Martin, C.-O., Agbogba, K., Lippe, S., and Labbe, A. (2020). Conditional canonical correlation estimation based on covariates with random forests. arXiv preprint [arXiv:2011.11555](http://arxiv.org/abs/2011.11555).
