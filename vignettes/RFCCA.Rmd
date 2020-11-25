@@ -42,7 +42,7 @@ knitr::opts_chunk$set(
 ```
 
 # Introduction
-This R package implements the Random Forest with Canonical Correlation Analysis (RFCCA) method described in Alakus et al. (2020) [<arXiv:2011.11555>](http://arxiv.org/abs/2011.11555). The theoretical details are given in the next section. The last section presents a data analysis using this method. 
+This R package implements the Random Forest with Canonical Correlation Analysis (RFCCA) method described in Alakus et al. (2020) [<arXiv:2011.11555>](https://arxiv.org/abs/2011.11555). The theoretical details are given in the next section. The last section presents a data analysis using this method. 
 
 # Method
 ## Motivation
