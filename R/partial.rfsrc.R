@@ -275,7 +275,7 @@ partial.rfsrc <- function(
                                   list(as.integer(0), NULL, as.double(0)), ## Quantiles disabled.
                                   as.integer(get.tree),
                                   as.integer(get.rf.cores()))}, error = function(e) {
-                                    cat(e)
+                                    print(e)
                                     NULL})
   ## check for error return condition in the native code
   if (is.null(nativeOutput)) {
