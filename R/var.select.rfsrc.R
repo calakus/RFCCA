@@ -427,7 +427,7 @@ var.select.rfsrc <-
         }
       cat("\n\n")
       cat("Top variables:\n")
-      print(round(varselect[top.var.pt, ], 3))
+      cat(round(varselect[top.var.pt, ], 3))
       cat("-----------------------------------------------------------\n")
     }
     ## Return the goodies
@@ -631,7 +631,7 @@ var.select.rfsrc <-
       }
     cat("\n\n")
     cat("Top variables:\n")
-    print(round(varselect[1:modelsize,, drop = FALSE], 3))
+    cat(round(varselect[1:modelsize,, drop = FALSE], 3))
     cat("-----------------------------------------------------------\n")
   }
   ## return the goodies

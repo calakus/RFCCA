@@ -48,9 +48,9 @@ plot.variable.rfsrc <- function(
   dots <- list(...)
   plot.names <- names(formals(plot.default))
   bxp.names <- unique(c(names(formals(bxp)),
-                 "xaxt", "yaxt", "las", "cex.axis", 
+                 "xaxt", "yaxt", "las", "cex.axis",
                  "col.axis", "main", "cex.main",
-                 "col.main", "sub", "cex.sub", "col.sub", 
+                 "col.main", "sub", "cex.sub", "col.sub",
                  "xlab", "ylab", "cex.lab", "col.lab", "boxfill","varwidth"))
   axis.names <- unique(c(names(formals(axis)), "las", "cex.axis"))
   ## by default xlab and ylab are extracted from the data
@@ -70,10 +70,10 @@ plot.variable.rfsrc <- function(
     dots$boxfill <- "bisque"
   }
   ## --------------------------------------------------------------------------------------------
-  ## do the following if the class is NOT "plot.variable" 
+  ## do the following if the class is NOT "plot.variable"
   ## (i.e. the object has not already been processed by the wraper)
   if (!inherits(object, "plot.variable")) {
-    ## process the subsetted index 
+    ## process the subsetted index
     ## assumes the entire data set is to be used if not specified
     if (missing(subset)) {
       subset <- 1:n
@@ -216,7 +216,7 @@ plot.variable.rfsrc <- function(
           ## x <- na.omit(object$xvar[, object$xvar.names == xvar.names[k]])
           ## Bug reported by Amol Pande 16/11/2017
           x <- na.omit(xvar[, object$xvar.names == xvar.names[k]])
-          if (is.factor(x)) x <- factor(x, exclude = NULL)          
+          if (is.factor(x)) x <- factor(x, exclude = NULL)
           n.x <- length(unique(x))
           if (!is.factor(x) & n.x > npts) {
             x.uniq <- sort(unique(x))[unique(as.integer(seq(1, n.x, length = min(npts, n.x))))]
@@ -258,7 +258,7 @@ plot.variable.rfsrc <- function(
             }
             else {
               sd.temp <- apply(pred.temp, 2, sd, na.rm = TRUE)
-              yhat.se <- sd.temp / sqrt(n)                
+              yhat.se <- sd.temp / sqrt(n)
             }
           }
           else {
@@ -288,7 +288,7 @@ plot.variable.rfsrc <- function(
                               ylabel = ylabel,
                               n = n,
                               xvar.names = xvar.names,
-                              nvar = nvar, 
+                              nvar = nvar,
                               plots.per.page = plots.per.page,
                               granule = granule,
                               smooth.lines = smooth.lines)
@@ -315,7 +315,7 @@ plot.variable.rfsrc <- function(
       ylabel <- plot.variable.obj$ylabel
       n <- plot.variable.obj$n
       xvar.names <- plot.variable.obj$xvar.names
-      nvar <- plot.variable.obj$nvar 
+      nvar <- plot.variable.obj$nvar
       plots.per.page <- plot.variable.obj$plots.per.page
       granule <- plot.variable.obj$granule
       smooth.lines <- plot.variable.obj$smooth.lines
@@ -334,6 +334,7 @@ plot.variable.rfsrc <- function(
   ## save par settings
   if (show.plots) {
     old.par <- par(no.readonly = TRUE)
+    on.exit(par(old.par))
   }
   ## --------------------------------------------------------------------------------
   ##
@@ -393,7 +394,7 @@ plot.variable.rfsrc <- function(
     for (k in 1:nvar) {
       ## x-stuff
       x <- prtl[[k]]$x
-      if (is.factor(x)) x <- factor(x, exclude = NULL)          
+      if (is.factor(x)) x <- factor(x, exclude = NULL)
       x.uniq <- prtl[[k]]$x.uniq
       n.x <- prtl[[k]]$n.x
       if (n.x > 25) cex.pt <- 0.5 else cex.pt <- 0.75
@@ -449,9 +450,9 @@ plot.variable.rfsrc <- function(
     }
   }
   ## Restore par settings
-  if (show.plots) {
-    par(old.par)
-  }
+  # if (show.plots) {
+  #   par(old.par)
+  # }
   ## Return the plot.variable object for reuse
   invisible(plot.variable.obj)
 }
@@ -527,7 +528,7 @@ extract.pred <- function(obj, type, subset, time, m.target, target, oob = oob) {
                     "prob" = prob[, target],
                     "bayes" =  get.bayes.rule(prob)))
     }
-    else {      
+    else {
       n <- length(pred)
       if (missing(subset)) subset <- 1:n
       return(pred[subset])
@@ -625,7 +626,7 @@ extract.partial.pred <- function(obj, type, subset, m.target, target) {
           regrClassTarget <- which (names(obj$regrOutput) == m.target)
           ## Regression.
           if (length(regrClassTarget) > 0) {
-            if (length(regrClassTarget) > 1) {            
+            if (length(regrClassTarget) > 1) {
               ## Safety check in case m.target was incorrect coming into this routine.
               stop("Invalid number of target outcomes specified in partial plot extraction.")
             }

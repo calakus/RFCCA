@@ -436,7 +436,7 @@ rfsrc <- function(formula, data, mvdata1, mvdata2, ntree = 1000,
                                     as.double(prob.epsilon),
                                     as.double(NULL),
                                     as.integer(get.rf.cores()))}, error = function(e) {
-                                        print(e)
+                                        cat(e)
                                         NULL})
     ## check for error return condition in the native code
     if (is.null(nativeOutput)) {

@@ -152,7 +152,7 @@ find.interaction.rfsrc <- function(
       cat("            Monte Carlo replications: ", nrep,                         "\n", sep="")
       cat("    Type of noising up used for VIMP: ", importance,                   "\n", sep="")
       cat("\n")
-      if (n.event == 1) print(round(interact.imp, 4)) else print(interact.imp)
+      if (n.event == 1) cat(round(interact.imp, 4)) else cat(interact.imp)
     }
     ## return the goodies
     invisible(interact.imp)
@@ -174,7 +174,7 @@ find.interaction.rfsrc <- function(
         cat("                    No. of variables: ", n.interact,          "\n", sep="")
         cat("  Variables sorted by minimal depth?: ", sorted,              "\n", sep="")
         cat("\n")
-        print(round(sub.order, 2))
+        cat(round(sub.order, 2))
       }
       ## return the goodies
       invisible(sub.order)

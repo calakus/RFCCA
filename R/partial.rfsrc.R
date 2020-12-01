@@ -54,7 +54,7 @@ partial.rfsrc <- function(
     stop("x-variable specified incorrectly:  ", partial.xvar)
   }
   ## verify the x-var2
-  if (!is.null(partial.xvar2)) {   
+  if (!is.null(partial.xvar2)) {
       if (length(partial.xvar2) != length(partial.values2)) {
           stop("second order x-variable and value vectors not of same length:  ", length(partial.xvar2), "vs", length(partial.values2))
       }
@@ -152,7 +152,7 @@ partial.rfsrc <- function(
                                   as.integer(
                                       ensemble.bits +
                                       bootstrap.bits +
-                                      cr.bits), 
+                                      cr.bits),
                                   as.integer(
                                       samptype.bits +
                                       na.action.bits +
@@ -179,7 +179,7 @@ partial.rfsrc <- function(
                                   as.integer(object$seed),
                                   as.integer(hdim),
                                   ## Object containing base learner settings, this is never NULL.
-                                  object$base.learner, 
+                                  object$base.learner,
                                   as.integer((object$nativeArray)$treeID),
                                   as.integer((object$nativeArray)$nodeID),
                                   ## This is hc_zero.  It is never NULL.
@@ -194,7 +194,7 @@ partial.rfsrc <- function(
                                                as.integer((object$nativeArray)$augmXtwo))
                                       } else { NULL }
                                   } else { NULL },
-                                  ## This slot is hc_one.  This slot can be NULL.                                  
+                                  ## This slot is hc_one.  This slot can be NULL.
                                   if (hdim > 0) {
                                       list(as.integer((object$nativeArray)$hcDim),
                                       as.double((object$nativeArray)$contPTR))
@@ -255,7 +255,7 @@ partial.rfsrc <- function(
                                   list(if (is.null(m.target.idx)) as.integer(0) else as.integer(length(m.target.idx)),
                                        if (is.null(m.target.idx)) NULL else as.integer(m.target.idx)),
                                   as.integer(0),  ## Pruning disabled
-                                    
+
                                   list(as.integer(0), NULL), ## Importance disabled.
                                   ## Partial variables enabled.  Note the as.integer is needed.
                                   list(as.integer(get.type(family, partial.type)),
@@ -275,7 +275,7 @@ partial.rfsrc <- function(
                                   list(as.integer(0), NULL, as.double(0)), ## Quantiles disabled.
                                   as.integer(get.tree),
                                   as.integer(get.rf.cores()))}, error = function(e) {
-                                    print(e)
+                                    cat(e)
                                     NULL})
   ## check for error return condition in the native code
   if (is.null(nativeOutput)) {
@@ -302,7 +302,7 @@ partial.rfsrc <- function(
       ##   type = mort
       ##   -> of dim [length(partial.values)] x [1] x [1] x [n]
       ## Outgoing to the R code:
-      ##   -> of dim [n] x [length(partial.values)]  
+      ##   -> of dim [n] x [length(partial.values)]
       survOutput <- (if (!is.null(nativeOutput$partialSurv))
                        array(nativeOutput$partialSurv,
                              c(n, length(partial.values)),
@@ -314,7 +314,7 @@ partial.rfsrc <- function(
       ##   type = chf
       ##   -> of dim [length(partial.values)] x [1] x [length(partial.time)] x [n]
       ## Outgoing to the R code:
-      ##   -> of dim [n] x [length(partial.time)] x [length(partial.values)]  
+      ##   -> of dim [n] x [length(partial.time)] x [length(partial.values)]
       survOutput <- (if (!is.null(nativeOutput$partialSurv))
                        array(nativeOutput$partialSurv,
                              c(n, length(event.info$time.interest), length(partial.values)),
@@ -329,7 +329,7 @@ partial.rfsrc <- function(
         ##   type = surv
         ##   -> of dim [length(partial.values)] x [1] x [length(partial.time)] x [n]
         ## Outgoing to the R code:
-        ##   -> of dim [n] x [length(partial.time)] x [length(partial.values)]  
+        ##   -> of dim [n] x [length(partial.time)] x [length(partial.values)]
         survOutput <- (if (!is.null(nativeOutput$partialSurv))
                          array(nativeOutput$partialSurv,
                                c(n, length(event.info$time.interest), length(partial.values)),
@@ -350,7 +350,7 @@ partial.rfsrc <- function(
       ##   type = years.lost
       ##   -> of dim [length(partial.values)] x [length(event.info$event.type)] x [1] x [n]
       ## Outgoing to the R code:
-      ##   -> of dim [n] x [length(event.info$event.type)] x [length(partial.values)]  
+      ##   -> of dim [n] x [length(event.info$event.type)] x [length(partial.values)]
       survOutput <- (if (!is.null(nativeOutput$partialSurv))
                        array(nativeOutput$partialSurv,
                              c(n, length(event.info$event.type), length(partial.values)),
@@ -415,9 +415,9 @@ partial.rfsrc <- function(
         ## Create and name the classification outputs.
         classOutput <- vector("list", class.count)
         names(classOutput) <- yvar.names[class.index]
-        ## Vector to hold the number of levels in each factor response. 
+        ## Vector to hold the number of levels in each factor response.
         levels.count <- array(0, class.count)
-        ## List to hold the names of levels in each factor response. 
+        ## List to hold the names of levels in each factor response.
         levels.names <- vector("list", class.count)
         counter <- 0
         for (i in class.index) {
@@ -466,7 +466,7 @@ partial.rfsrc <- function(
             remove(ensemble)
           }
         }
-        rfsrcOutput <- c(rfsrcOutput, classOutput = list(classOutput))        
+        rfsrcOutput <- c(rfsrcOutput, classOutput = list(classOutput))
       }
       if (regr.count > 0) {
         ## Create and name the classification outputs.

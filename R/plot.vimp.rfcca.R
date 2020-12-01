@@ -67,6 +67,7 @@ plot.vimp.rfcca <- function(x,
   }
   ## save par settings
   old.par <- par(no.readonly = TRUE)
+  on.exit(par(old.par))
   par(mfrow=c(1,1))
   ## draw a horizontal barplot
   barplot(vimp.out,
@@ -79,8 +80,6 @@ plot.vimp.rfcca <- function(x,
           font.lab = 1,
           cex.main = 1.1,
           xlim=range(pretty(c(0, vimp.out))))
-  ## Restore par settings
-  par(old.par)
 
   ## Return the plot.variable object for reuse
   invisible(vimp.out)

@@ -84,7 +84,7 @@ plot.survival.rfsrc <- function (x,
     chf.ensb <- rbind(colMeans(chf.ensb, na.rm = TRUE))
   }
   ## ------------------------------------------------------------
-  ## 
+  ##
   ## survival calculations
   ##
   ## -------------------------------------------------------------
@@ -128,7 +128,7 @@ plot.survival.rfsrc <- function (x,
       cens.dist <- rep(1, length(censTime.pt))
     }
     ## ------------------------------------------------------------
-    ## 
+    ##
     ## brier calculations
     ##
     ## -------------------------------------------------------------
@@ -164,13 +164,14 @@ plot.survival.rfsrc <- function (x,
     colnames(crps) <- c("crps.q25", "crps.q50", "crps.q75", "crps.q100", "crps.all")
   }
   ## ------------------------------------------------------------
-  ## 
+  ##
   ## plots
   ##
   ## -------------------------------------------------------------
   ## should we display the plots?
   if (show.plots) {
     old.par <- par(no.readonly = TRUE)
+    on.exit(par(old.par))
     ## plots on one page
     if (plots.one.page) {
       if (pred.flag && !subset.provided) {
@@ -298,12 +299,12 @@ plot.survival.rfsrc <- function (x,
               cex = cex)
       rug(event.info$time.interest, ticksize=-0.03)
     }
-    ## reset par
-    par(old.par)
+    # ## reset par
+    # par(old.par)
   }
   ## ------------------------------------------------------------
-  ## 
-  ## return invisible objects 
+  ##
+  ## return invisible objects
   ##
   ## -------------------------------------------------------------
   ## invisibly return the brier score

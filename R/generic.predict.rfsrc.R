@@ -655,7 +655,7 @@ generic.predict.rfsrc <-
                                        if (is.null(prob.assign$prob.epsilon)) as.double(0) else as.double(prob.assign$prob.epsilon)),
                                   as.integer(get.tree),
                                   as.integer(get.rf.cores()))}, error = function(e) {
-                                    print(e)
+                                    cat(e)
                                     NULL})
   ## check for error return condition in the native code
   if (is.null(nativeOutput)) {
