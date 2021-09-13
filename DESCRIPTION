@@ -1,6 +1,6 @@
 Package: RFCCA
 Title: Random Forest with Canonical Correlation Analysis
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: 
     c(person(given = "Cansu", family = "Alakus", role = c("aut", "cre"), email = "cansu.alakus@hec.ca"),
       person(given = "Denis", family = "Larocque", role = c("aut"), email = "denis.larocque@hec.ca"),
