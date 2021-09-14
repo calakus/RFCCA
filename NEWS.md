@@ -1,4 +1,4 @@
-## RFCCA 1.0.5
+## RFCCA 1.0.6
 Fixed the omp.h declaration before R headers per Prof. Ripley, in anticipation of clang 13.0.0.
 
 ## RFCCA 1.0.4
