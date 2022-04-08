@@ -1,3 +1,6 @@
+## RFCCA 1.0.8
+Fixed the 'length > 1 in coercion to logical' errors.
+
 ## RFCCA 1.0.7
 * Added CITATION file.
 * Updated paper reference information in package description and vignette.
