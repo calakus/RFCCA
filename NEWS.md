@@ -1,5 +1,6 @@
-## RFCCA 1.0.8
-Fixed the 'length > 1 in coercion to logical' errors.
+## RFCCA 1.0.9
+* Fixed the 'length > 1 in coercion to logical' errors.
+* Fixed Fortran calls for BLAS functions.
 
 ## RFCCA 1.0.7
 * Added CITATION file.
