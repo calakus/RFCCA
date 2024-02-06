@@ -1,3 +1,16 @@
+## RFCCA 2.0.0
+* Internal lapacke.h and cblas.h files are removed. Instead, LAPACK and BLAS libraries are used.
+
+## RFCCA 1.0.12
+* Fixed warning: format string is not a string literal.
+
+## RFCCA 1.0.11
+* Copyright information for LAPACK and BLAS libraries are added to the DESCRIPTION file.
+
+## RFCCA 1.0.10
+* Fixed function declaration without a prototype.
+* Fixed sprintf calls per Prof. Ripley.
+
 ## RFCCA 1.0.9
 * Fixed the 'length > 1 in coercion to logical' errors.
 * Fixed Fortran calls for BLAS functions.

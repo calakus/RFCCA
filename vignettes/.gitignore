@@ -1,2 +1,5 @@
+figure
 *.html
+*.R
+*.md
 *.R
